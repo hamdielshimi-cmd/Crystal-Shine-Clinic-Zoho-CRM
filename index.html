@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crystal Shine Clinic - Zoho CRM Comprehensive Manual</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .content-wrapper {
+            background: white;
+            min-height: 100vh;
+        }
+        
+        .gradient-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            border-bottom: 3px solid #667eea;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .search-highlight {
+            background-color: #fef08a;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        .workflow-card {
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s ease;
+        }
+        
+        .workflow-card:hover {
+            transform: translateX(5px);
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .module-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .module-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+        
+        [dir="rtl"] {
+            direction: rtl;
+            text-align: right;
+        }
+        
+        [dir="rtl"] .workflow-card {
+            border-left: none;
+            border-right: 4px solid #667eea;
+        }
+        
+        [dir="rtl"] .workflow-card:hover {
+            transform: translateX(-5px);
+        }
+        
+        .lang-en { display: block; }
+        .lang-ar { display: none; }
+        
+        [dir="rtl"] .lang-en { display: none; }
+        [dir="rtl"] .lang-ar { display: block; }
+        
+        .icon-feature {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <!-- Language Toggle Button -->
+        <div class="no-print fixed top-4 right-4 z-50 flex gap-2">
+            <button onclick="toggleLanguage('en')" id="btn-en" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-300">
+                <i class="fas fa-globe mr-2"></i>English
+            </button>
+            <button onclick="toggleLanguage('ar')" id="btn-ar" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-300">
+                <i class="fas fa-globe mr-2"></i>العربية
+            </button>
+        </div>
+
+        <!-- Header -->
+        <div class="gradient-header text-white py-12 px-6">
+            <div class="max-w-7xl mx-auto">
+                <h1 class="text-5xl font-bold mb-4 lang-en">Crystal Shine Clinic</h1>
+                <h1 class="text-5xl font-bold mb-4 lang-ar">عيادة كريستال شاين</h1>
+                <h2 class="text-3xl mb-2 lang-en">Zoho CRM Comprehensive Manual</h2>
+                <h2 class="text-3xl mb-2 lang-ar">دليل Zoho CRM الشامل</h2>
+                <p class="text-xl opacity-90 lang-en">Complete Guide to Streamlined Medical Practice Management</p>
+                <p class="text-xl opacity-90 lang-ar">دليل كامل لإدارة الممارسات الطبية بكفاءة</p>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="no-print max-w-7xl mx-auto px-6 -mt-6 mb-8">
+            <div class="bg-white rounded-lg shadow-xl p-4">
+                <div class="relative">
+                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Search for features, workflows, or procedures..." 
+                        class="w-full pl-12 pr-4 py-3 rounded-lg border-2 border-gray-200 focus:border-purple-500 focus:outline-none transition lang-en"
+                        onkeyup="searchContent()"
+                    >
+                    <input 
+                        type="text" 
+                        id="searchInputAr" 
+                        placeholder="ابحث عن الميزات أو سير العمل أو الإجراءات..." 
+                        class="w-full pl-12 pr-4 py-3 rounded-lg border-2 border-gray-200 focus:border-purple-500 focus:outline-none transition lang-ar"
+                        onkeyup="searchContent()"
+                    >
+                </div>
+            </div>
+        </div>
+
+        <!-- Introduction Section -->
+        <div class="max-w-7xl mx-auto px-6 mb-12">
+            <div class="bg-white rounded-lg shadow-xl p-8">
+                <h2 class="text-4xl font-bold mb-6 text-gray-800 lang-en">
+                    <i class="fas fa-network-wired mr-3 text-purple-600"></i>
+                    Zoho CRM Core Logic & Data Flow
+                </h2>
+                <h2 class="text-4xl font-bold mb-6 text-gray-800 lang-ar">
+                    <i class="fas fa-network-wired mr-3 text-purple-600"></i>
+                    المنطق الأساسي وتدفق البيانات في Zoho CRM
+                </h2>
+
+                <div class="lang-en">
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-700">Understanding Zoho CRM for Healthcare</h3>
+                        <p class="text-lg text-gray-600 leading-relaxed mb-4">
+                            Zoho CRM is a comprehensive patient relationship management system designed to streamline medical practice operations. The system operates on a logical data flow that transforms potential patients into active accounts while maintaining complete interaction history. This ensures that every touchpoint with a patient is tracked, analyzed, and optimized for better care delivery and business outcomes.
+                        </p>
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            The platform integrates seamlessly with healthcare-specific tools like appointment scheduling, billing systems, and electronic health records, creating a unified ecosystem for managing all aspects of patient care and clinic operations.
+                        </p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold mb-6 text-gray-700">Core Module Relationships</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="module-card bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-md">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-user-plus icon-feature mr-4"></i>
+                                    <h4 class="text-xl font-semibold text-gray-800">Leads Module</h4>
+                                </div>
+                                <p class="text-gray-600 mb-4">Initial patient inquiries or potential patients who have shown interest in your services. This module captures all first-contact information and helps qualify prospects.</p>
+                                <div class="bg-white rounded-lg p-4">
+                                    <h5 class="font-semibold mb-2 text-gray-700">Key Fields:</h5>
+                                    <ul class="space-y-1 text-sm text-gray-600">
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Patient Name & Contact Details</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Service Interest</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Referral Source</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Appointment Request</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Insurance Information</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="module-card bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-6 shadow-md">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-user-check icon-feature mr-4"></i>
+                                    <h4 class="text-xl font-semibold text-gray-800">Contacts Module</h4>
+                                </div>
+                                <p class="text-gray-600 mb-4">Active patients who have completed registration and have ongoing relationships with the clinic. This is your primary patient database.</p>
+                                <div class="bg-white rounded-lg p-4">
+                                    <h5 class="font-semibold mb-2 text-gray-700">Key Fields:</h5>
+                                    <ul class="space-y-1 text-sm text-gray-600">
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Complete Patient Profile</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Medical History</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Emergency Contacts</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Insurance Details</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Communication Preferences</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="module-card bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-6 shadow-md">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-building icon-feature mr-4"></i>
+                                    <h4 class="text-xl font-semibold text-gray-800">Accounts Module</h4>
+                                </div>
+                                <p class="text-gray-600 mb-4">Corporate accounts, insurance companies, or family accounts representing multiple patients. Manages B2B relationships.</p>
+                                <div class="bg-white rounded-lg p-4">
+                                    <h5 class="font-semibold mb-2 text-gray-700">Key Fields:</h5>
+                                    <ul class="space-y-1 text-sm text-gray-600">
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Company/Family Name</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Billing Address</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Primary Contact</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Credit Terms</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Account Code</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="module-card bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg p-6 shadow-md">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-handshake icon-feature mr-4"></i>
+                                    <h4 class="text-xl font-semibold text-gray-800">Deals Module</h4>
+                                </div>
+                                <p class="text-gray-600 mb-4">Treatment plans or service packages that represent revenue opportunities. Tracks the sales pipeline from consultation to completion.</p>
+                                <div class="bg-white rounded-lg p-4">
+                                    <h5 class="font-semibold mb-2 text-gray-700">Key Fields:</h5>
+                                    <ul class="space-y-1 text-sm text-gray-600">
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Service Type/Procedure</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Estimated Value</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Treatment Timeline</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Insurance Coverage</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>Payment Plan</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-700">Data Flow Process</h3>
+                        <div class="success-box border-l-4 border-green-500 rounded-lg p-6">
+                            <h4 class="text-xl font-semibold mb-3 text-gray-800">Lead → Contact → Deal → Patient Journey</h4>
+                            <p class="text-gray-700 leading-relaxed">
+                                The system follows a systematic approach where initial inquiries become active patients, and services become revenue-generating opportunities. This ensures complete traceability from first contact to final service delivery. Each conversion maintains data integrity and relationship history, allowing for comprehensive patient lifecycle management.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="info-box rounded-lg p-6">
+                        <h4 class="text-xl font-semibold mb-4 text-gray-800">
+                            <i class="fas fa-route mr-2 text-purple-600"></i>
+                            Conversion Process Flow
+                        </h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="step-number text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">1</div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">Capture Patient Inquiry as Lead</h5>
+                                    <p class="text-gray-600">Record initial contact information through website forms, phone calls, or walk-ins</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="step-number text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">2</div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">Qualify and Convert Lead to Contact</h5>
+                                    <p class="text-gray-600">Verify patient interest, confirm details, and convert to active patient record</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="step-number text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">3</div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">Create Account for Corporate/Family Relationships</h5>
+                                    <p class="text-gray-600">Establish organizational connections for insurance companies or family groups</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="step-number text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">4</div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">Generate Deal for Treatment Plans</h5>
+                                    <p class="text-gray-600">Create revenue opportunity record for proposed services and procedures</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="step-number text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">5</div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">Track Through Pipeline Stages</h5>
+                                    <p class="text-gray-600">Monitor progress from consultation through treatment to completion</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="step-number text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">6</div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">Complete Service and Close Deal</h5>
+                                    <p class="text-gray-600">Finalize treatment, collect payment, and mark opportunity as won</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lang-ar">
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-700">فهم Zoho CRM للرعاية الصحية</h3>
+                        <p class="text-lg text-gray-600 leading-relaxed mb-4">
+                            Zoho CRM هو نظام شامل لإدارة علاقات المرضى مصمم لتبسيط عمليات الممارسة الطبية. يعمل النظام على تدفق منطقي للبيانات يحول المرضى المحتملين إلى حسابات نشطة مع الحفاظ على محفوظات التفاعل الكاملة. هذا يضمن تتبع كل نقطة اتصال مع المريض وتحليلها وتحسينها لتحسين تقديم الرعاية ونتائج الأعمال.
+                        </p>
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            تتكامل المنصة بسلاسة مع الأدوات الخاصة بالرعاية الصحية مثل جدولة المواعيد وأنظمة الفوترة والسجلات الصحية الإلكترونية، مما يخلق نظامًا بيئيًا موحدًا لإدارة جميع جوانب رعاية المرضى وعمليات العيادة.
+                        </p>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold mb-6 text-gray-700">علاقات الوحدات الأساسية</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="module-card bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-md">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-user-plus icon-feature mr-4"></i>
+                                    <h4 class="text-xl font-semibold text-gray-800">وحدة العملاء المتوقعين</h4>
+                                </div>
+                                <p class="text-gray-600 mb-4">استفسارات المرضى الأولية أو المرضى المحتملين الذين أبدوا اهتمامًا بخدماتك. تلتقط هذه الوحدة جميع معلومات الاتصال الأولى وتساعد في تأهيل العملاء المحتملين.</p>
+                                <div class="bg-white rounded-lg p-4">
+                                    <h5 class="font-semibold mb-2 text-gray-700">الحقول الرئيسية:</h5>
+                                    <ul class="space-y-1 text-sm text-gray-600">
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>اسم المريض وتفاصيل الاتصال</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>الاهتمام بالخدمة</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>مصدر الإحالة</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>طلب الموعد</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>معلومات التأمين</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="module-card bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-6 shadow-md">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-user-check icon-feature mr-4"></i>
+                                    <h4 class="text-xl font-semibold text-gray-800">وحدة الاتصالات</h4>
+                                </div>
+                                <p class="text-gray-600 mb-4">المرضى النشطين الذين أكملوا التسجيل ولديهم علاقات مستمرة مع العيادة. هذه هي قاعدة بيانات المرضى الأساسية.</p>
+                                <div class="bg-white rounded-lg p-4">
+                                    <h5 class="font-semibold mb-2 text-gray-700">الحقول الرئيسية:</h5>
+                                    <ul class="space-y-1 text-sm text-gray-600">
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>الملف الشخصي الكامل للمريض</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>التاريخ الطبي</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>جهات الاتصال في حالات الطوارئ</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>تفاصيل التأمين</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>تفضيلات التواصل</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="module-card bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-6 shadow-md">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-building icon-feature mr-4"></i>
+                                    <h4 class="text-xl font-semibold text-gray-800">وحدة الحسابات</h4>
+                                </div>
+                                <p class="text-gray-600 mb-4">الحسابات التجارية، شركات التأمين، أو حسابات العائلات التي تمثل عدة مرضى. تدير علاقات B2B.</p>
+                                <div class="bg-white rounded-lg p-4">
+                                    <h5 class="font-semibold mb-2 text-gray-700">الحقول الرئيسية:</h5>
+                                    <ul class="space-y-1 text-sm text-gray-600">
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>اسم الشركة/العائلة</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>عنوان الفواتير</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>جهة الاتصال الأساسية</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>شروط الائتمان</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>رمز الحساب</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="module-card bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg p-6 shadow-md">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-handshake icon-feature mr-4"></i>
+                                    <h4 class="text-xl font-semibold text-gray-800">وحدة الصفقات</h4>
+                                </div>
+                                <p class="text-gray-600 mb-4">خطط العلاج أو حزم الخدمات التي تمثل فرصًا لإيرادات. تتبع خط أنابيب المبيعات من الاستشارة إلى الاكتمال.</p>
+                                <div class="bg-white rounded-lg p-4">
+                                    <h5 class="font-semibold mb-2 text-gray-700">الحقول الرئيسية:</h5>
+                                    <ul class="space-y-1 text-sm text-gray-600">
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>نوع الخدمة/الإجراء</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>القيمة المقدرة</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>الجدول الزمني للعلاج</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>تغطية التأمين</li>
+                                        <li><i class="fas fa-check text-green-500 mr-2"></i>خطة الدفع</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-700">عملية تدفق البيانات</h3>
+                        <div class="success-box border-r-4 border-green-500 rounded-lg p-6">
+                            <h4 class="text-xl font-semibold mb-3 text-gray-800">العميل المتوقع ← الاتصال ← الصفقة ← رحلة المريض</h4>
+                            <p class="text-gray-700 leading-relaxed">
+                                يتبع النظام نهجًا منهجيًا حيث تتحول الاستفسارات الأولية إلى مرضى نشطين، وتصبح الخدمات فرصًا لإيرادات. هذا يضمن التتبع الكامل من أول اتصال إلى التسليم النهائي للخدمة. يحافظ كل تحويل على سلامة البيانات وتاريخ العلاقات، مما يسمح بإدارة دورة حياة المريض الشاملة.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="info-box rounded-lg p-6">
+                        <h4 class="text-xl font-semibold mb-4 text-gray-800">
+                            <i class="fas fa-route mr-2 text-purple-600"></i>
+                            تدفق عملية التحويل
+                        </h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="step-number text-white rounded-full w-10 h-10 flex items-center justify-center ml-4 flex-shrink-0">1</div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">التقاط استفسار المريض كعميل متوقع</h5>
+                                    <p class="text-gray-600">تسجيل معلومات الاتصال الأولية من خلال نماذج الموقع أو المكالمات الهاتفية أو الزيارات</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="step-number text-white rounded-full w-10 h-10 flex items-center justify-center ml-4 flex-shrink-0">2</div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">التحقق من العميل المتوقع وتحويله إلى اتصال</h5>
+                                    <p class="text-gray-600">التحقق من اهتمام المريض، تأكيد التفاصيل، والتحويل إلى سجل مريض نشط</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="step-number text-white rounded-full w-10 h-10 flex items-center justify-center ml-4 flex-shrink-0">3</div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">إنشاء حساب للعلاقات التجارية/العائلية</h5>
+                                    <p class="text-gray-600">إنشاء اتصالات تنظيمية لشركات التأمين أو مجموعات العائلة</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="step-number text-white rounded-full w-10 h-10 flex items-center justify-center ml-4 flex-shrink-0">4</div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">إنشاء صفقة لخطط العلاج</h5>
+                                    <p class="text-gray-600">إنشاء سجل فرصة إيرادات للخدمات والإجراءات المقترحة</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="step-number text-white rounded-full w-10 h-10 flex items-center justify-center ml-4 flex-shrink-0">5</div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">التتبع خلال مراحل خط الأنابيب</h5>
+                                    <p class="text-gray-600">مراقبة التقدم من الاستشارة خلال العلاج إلى الاكتمال</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="step-number text-white rounded-full w-10 h-10 flex items-center justify-center ml-4 flex-shrink-0">6</div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-800">إكمال الخدمة وإغلاق الصفقة</h5>
+                                    <p class="text-gray-600">الانتهاء من العلاج، جمع الدفع، ووضع علامة على الفرصة كفوز</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Section -->
+        <div class="max-w-7xl mx-auto px-6 mb-12">
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+                <!-- Tab Buttons -->
+                <div class="no-print flex border-b">
+                    <button class="tab-button active flex-1 py-4 px-6 text-center font-semibold transition-colors hover:bg-gray-50" onclick="openTab('core-sales')">
+                        <i class="fas fa-chart-line mr-2"></i>
+                        <span class="lang-en">Core CRM & Sales</span>
+                        <span class="lang-ar">نظام CRM والمبيعات الأساسي</span>
+                    </button>
+                    <button class="tab-button flex-1 py-4 px-6 text-center font-semibold transition-colors hover:bg-gray-50" onclick="openTab('reception')">
+                        <i class="fas fa-desk mr-2"></i>
+                        <span class="lang-en">Reception Desk</span>
+                        <span class="lang-ar">مكتب الاستقبال</span>
+                    </button>
+                    <button class="tab-button flex-1 py-4 px-6 text-center font-semibold transition-colors hover:bg-gray-50" onclick="openTab('accounting')">
+                        <i class="fas fa-calculator mr-2"></i>
+                        <span class="lang-en">Accounting & Finance</span>
+                        <span class="lang-ar">المحاسبة والتمويل</span>
+                    </button>
+                </div>
+
+                <!-- Tab Contents -->
+                <div id="core-sales" class="tab-content active p-8">
+                    <div class="lang-en">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-800">
+                            <i class="fas fa-chart-line mr-3 text-purple-600"></i>
+                            Core CRM & Sales Department
+                        </h2>
+
+                        <!-- Lead Management -->
+                        <div class="workflow-card bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 mb-8 shadow-md">
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">
+                                <i class="fas fa-funnel-dollar mr-2 text-blue-600"></i>
+                                Lead Management Workflow
+                            </h3>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-xl font-semibold mb-3 text-gray-700">Step 1: Lead Capture and Entry</h4>
+                                <div class="bg-white rounded-lg p-4 space-y-2">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Access Zoho CRM Dashboard by logging in with your credentials at crm.zoho.com</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Navigate to '<strong>Leads</strong>' module from the main navigation menu</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Click '<strong>Create Lead</strong>' button located in the top-right corner of the screen</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Fill in mandatory fields: <strong>First Name</strong>, <strong>Last Name</strong>, <strong>Company</strong> (enter "Individual" for B2C)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Enter contact information: <strong>Mobile Phone</strong>, <strong>Email Address</strong>, <strong>Street Address</strong></p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Select '<strong>Lead Source</strong>' from dropdown menu (Website, Referral, Walk-in, Social Media, Advertisement)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Choose '<strong>Service Interest</strong>' from available clinic services</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Set '<strong>Lead Status</strong>' to '<strong>New</strong>' for fresh inquiries</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Add '<strong>Next Follow-up Date</strong>' based on patient's preferred contact time</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Enter detailed '<strong>Description</strong>' of patient inquiry and specific needs</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Click '<strong>Save</strong>' button to create the lead record</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="warning-box border-l-4 border-yellow-500 rounded-lg p-4 mt-4">
+                                    <h5 class="font-semibold mb-2 text-gray-800">
+                                        <i class="fas fa-exclamation-triangle mr-2 text-yellow-600"></i>
+                                        Critical Fields to Complete
+                                    </h5>
+                                    <p class="text-gray-700">First Name, Last Name, Mobile Phone, Email, Lead Source, Service Interest, and Description are mandatory for proper lead tracking and follow-up automation.</p>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <h4 class="text-xl font-semibold mb-3 text-gray-700">Step 2: Initial Contact and Qualification</h4>
+                                <div class="bg-white rounded-lg p-4 space-y-2">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Open the lead record by clicking on patient name from leads list view</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Review all information carefully including service interest and description</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Make first contact within <strong>2 hours</strong> during business hours (9 AM - 6 PM)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Use preferred contact method: Click '<strong>Call</strong>' button to dial directly through system, or click '<strong>Send Email</strong>'</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Introduce yourself: "Good morning/afternoon, this is [Your Name] from Crystal Shine Clinic"</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Confirm patient interest and ask about specific needs and preferences</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Document conversation by clicking '<strong>Add Note</strong>' button in Activity section</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Update lead status to '<strong>Contacted</strong>' after successful interaction</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">If interested, schedule consultation using '<strong>Create Event</strong>' button linked to Zoho Bookings</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Set follow-up task by clicking '<strong>Create Task</strong>' for appointment confirmation 24 hours before</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">If qualified, proceed to convert lead by clicking '<strong>Convert</strong>' button at top of page</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="success-box border-l-4 border-green-500 rounded-lg p-4 mt-4">
+                                    <h5 class="font-semibold mb-2 text-gray-800">
+                                        <i class="fas fa-check-circle mr-2 text-green-600"></i>
+                                        Qualification Criteria
+                                    </h5>
+                                    <ul class="space-y-1 text-gray-700">
+                                        <li>• Patient has specific service request and shows genuine interest</li>
+                                        <li>• Contact information has been verified and confirmed</li>
+                                        <li>• Patient understands pricing structure and payment options</li>
+                                        <li>• Patient is ready to proceed with consultation booking</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <h4 class="text-xl font-semibold mb-3 text-gray-700">Step 3: Converting Leads to Contacts</h4>
+                                <div class="bg-white rounded-lg p-4 space-y-2">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Open the qualified lead record by clicking on patient name</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Click '<strong>Convert</strong>' button located at the top of the lead page</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Conversion popup will appear with three options: <strong>Contact</strong>, <strong>Account</strong>, <strong>Deal</strong></p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Check '<strong>Contact</strong>' checkbox (automatically selected)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">For B2B or family accounts, check '<strong>Account</strong>' checkbox and enter company/family name</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Check '<strong>Deal</strong>' checkbox if treatment plan discussion has occurred</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Review field mapping to ensure all information transfers correctly</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Click '<strong>Convert</strong>' button at bottom of popup to execute conversion</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">System automatically creates Contact record and optionally Account and Deal records</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Navigate to newly created Contact record to complete additional fields</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Update contact status to '<strong>Active Patient</strong>' in the status field</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Set initial appointment date in '<strong>Next Appointment</strong>' field</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-box rounded-lg p-4 mt-4">
+                                    <h5 class="font-semibold mb-2 text-gray-800">
+                                        <i class="fas fa-info-circle mr-2 text-blue-600"></i>
+                                        Additional Contact Record Fields
+                                    </h5>
+                                    <div class="grid md:grid-cols-2 gap-4 mt-3">
+                                        <div>
+                                            <p class="font-semibold text-gray-700 mb-2">Patient Demographics:</p>
+                                            <ul class="space-y-1 text-sm text-gray-600">
+                                                <li>• Date of Birth</li>
+                                                <li>• Gender</li>
+                                                <li>• National ID Number</li>
+                                                <li>• Marital Status</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-gray-700 mb-2">Medical Information:</p>
+                                            <ul class="space-y-1 text-sm text-gray-600">
+                                                <li>• Blood Type</li>
+                                                <li>• Known Allergies</li>
+                                                <li>• Chronic Conditions</li>
+                                                <li>• Current Medications</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-gray-700 mb-2">Insurance Details:</p>
+                                            <ul class="space-y-1 text-sm text-gray-600">
+                                                <li>• Insurance Provider</li>
+                                                <li>• Policy Number</li>
+                                                <li>• Coverage Type</li>
+                                                <li>• Co-pay Amount</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-gray-700 mb-2">Emergency Contact:</p>
+                                            <ul class="space-y-1 text-sm text-gray-600">
+                                                <li>• Contact Name</li>
+                                                <li>• Relationship</li>
+                                                <li>• Phone Number</li>
+                                                <li>• Alternative Contact</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Deal Management -->
+                        <div class="workflow-card bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-6 mb-8 shadow-md">
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">
+                                <i class="fas fa-handshake mr-2 text-green-600"></i>
+                                Deal Management and Pipeline
+                            </h3>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-xl font-semibold mb-3 text-gray-700">Step 4: Creating and Managing Treatment Deals</h4>
+                                <div class="bg-white rounded-lg p-4 space-y-2">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Navigate to '<strong>Deals</strong>' module from main navigation menu</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Click '<strong>Create Deal</strong>' button in top-right corner</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Enter '<strong>Deal Name</strong>' using format: "[PatientName] - [ServiceType]" (e.g., "Sarah Ahmed - Dental Implant")</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Click '<strong>Contact Name</strong>' field and select associated patient from dropdown</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Select '<strong>Account Name</strong>' if patient belongs to corporate or family account</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Enter '<strong>Amount</strong>' based on treatment cost estimate (include all procedure costs)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Select '<strong>Stage</strong>' from pipeline (Consultation Scheduled, Treatment Plan Created, etc.)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Set '<strong>Closing Date</strong>' based on expected treatment completion timeline</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Assign '<strong>Deal Owner</strong>' to responsible physician or treatment coordinator</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Fill '<strong>Description</strong>' with detailed treatment plan, procedures, and timeline</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Add '<strong>Products</strong>' by clicking '+' button and selecting relevant services from catalog</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Click '<strong>Save</strong>' to create deal record</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="success-box border-l-4 border-green-500 rounded-lg p-4 mt-4">
+                                    <h5 class="font-semibold mb-2 text-gray-800">
+                                        <i class="fas fa-stream mr-2 text-green-600"></i>
+                                        Pipeline Stages Explained
+                                    </h5>
+                                    <div class="space-y-2 text-gray-700">
+                                        <p><strong>1. Consultation Scheduled (10%):</strong> Initial appointment booked, patient evaluation pending</p>
+                                        <p><strong>2. Treatment Plan Created (25%):</strong> Physician has outlined recommended procedures and timeline</p>
+                                        <p><strong>3. Insurance Verification (40%):</strong> Confirming coverage and obtaining pre-authorization</p>
+                                        <p><strong>4. Treatment Approved (60%):</strong> Patient has agreed to proceed, payment plan established</p>
+                                        <p><strong>5. Treatment in Progress (80%):</strong> Procedures are being performed according to schedule</p>
+                                        <p><strong>6. Follow-up Scheduled (90%):</strong> Primary treatment complete, post-care appointments set</p>
+                                        <p><strong>7. Closed-Won (100%):</strong> All procedures completed successfully, payment received</p>
+                                        <p><strong>8. Closed-Lost (0%):</strong> Patient declined treatment or chose competitor</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <h4 class="text-xl font-semibold mb-3 text-gray-700">Step 5: Updating Deal Progress</h4>
+                                <div class="bg-white rounded-lg p-4 space-y-2">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Open deal record from Deals list view or contact record</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">To move stage, click '<strong>Stage</strong>' dropdown and select next appropriate stage</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Add progress notes by clicking '<strong>Add Note</strong>' in Activity Timeline section</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Attach relevant documents (treatment plans, consent forms, X-rays) using '<strong>Attach</strong>' button</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Update '<strong>Amount</strong>' if treatment plan changes or additional procedures added</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Adjust '<strong>Closing Date</strong>' if treatment timeline extends or accelerates</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Click '<strong>Save</strong>' after making updates</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Follow-up Management -->
+                        <div class="workflow-card bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6 mb-8 shadow-md">
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">
+                                <i class="fas fa-user-clock mr-2 text-purple-600"></i>
+                                Follow-up and Relationship Management
+                            </h3>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-xl font-semibold mb-3 text-gray-700">Step 6: Setting Up Automated Follow-ups</h4>
+                                <div class="bg-white rounded-lg p-4 space-y-2">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Go to '<strong>Setup</strong>' (gear icon) → '<strong>Automation</strong>' → '<strong>Workflow Rules</strong>'</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Click '<strong>Create Rule</strong>' and select '<strong>Contacts</strong>' module</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Name rule: "Post-Treatment Follow-up" and set trigger to '<strong>Field Update</strong>'</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Configure condition: When '<strong>Deal Stage</strong>' = '<strong>Closed-Won</strong>'</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Add action: '<strong>Send Email</strong>' with 1-week follow-up message template</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Add second action: '<strong>Create Task</strong>' for staff to make follow-up call</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Set time delay: Execute 7 days after deal closure</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Save and activate workflow rule</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-box rounded-lg p-4 mt-4">
+                                    <h5 class="font-semibold mb-2 text-gray-800">
+                                        <i class="fas fa-calendar-alt mr-2 text-blue-600"></i>
+                                        Recommended Follow-up Timeline
+                                    </h5>
+                                    <div class="space-y-2 text-gray-700">
+                                        <p><strong>Immediate (Same Day):</strong> Confirmation call after appointment booking</p>
+                                        <p><strong>24 Hours Before:</strong> Appointment reminder via SMS and email</p>
+                                        <p><strong>Same Day (Post-Visit):</strong> Thank you message and satisfaction survey</p>
+                                        <p><strong>1 Week:</strong> Check on recovery for surgical/intensive procedures</p>
+                                        <p><strong>1 Month:</strong> Routine follow-up for general procedures</p>
+                                        <p><strong>3 Months:</strong> Check-in for ongoing treatment plans</p>
+                                        <p><strong>6 Months:</strong> Dental cleaning or routine check-up reminder</p>
+                                        <p><strong>Annual:</strong> Comprehensive health check-up invitation</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <h4 class="text-xl font-semibold mb-3 text-gray-700">Step 7: Managing Patient Communication</h4>
+                                <div class="bg-white rounded-lg p-4 space-y-2">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Access contact record and navigate to '<strong>Activity</strong>' section</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Log all phone calls by clicking '<strong>Log a Call</strong>' button</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Enter call details: purpose, duration, outcome, and next steps</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Send emails directly from CRM by clicking '<strong>Send Email</strong>' button</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Use '<strong>Templates</strong>' for standard communications (appointment confirmations, care instructions)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Schedule future emails using '<strong>Schedule Send</strong>' option</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Track email opens and clicks in activity timeline</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Document all interactions with detailed notes for continuity of care</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reporting -->
+                        <div class="workflow-card bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg p-6 shadow-md">
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">
+                                <i class="fas fa-chart-bar mr-2 text-orange-600"></i>
+                                Sales Reporting and Analytics
+                            </h3>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-xl font-semibold mb-3 text-gray-700">Step 8: Generating Sales Reports</h4>
+                                <div class="bg-white rounded-lg p-4 space-y-2">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Navigate to '<strong>Reports</strong>' tab from main menu</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Select '<strong>Sales Reports</strong>' folder to view pre-built reports</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Choose from: Lead Conversion Rate, Deal Pipeline Analysis, Revenue Forecast, or Win/Loss Analysis</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Set date range using '<strong>Date Filter</strong>' (This Week, This Month, This Quarter, Custom)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Apply additional filters for specific services, physicians, or locations</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Click '<strong>Run Report</strong>' to generate visualization and data table</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Export report using '<strong>Export</strong>' button (PDF, Excel, CSV formats available)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Schedule automatic report delivery by clicking '<strong>Schedule</strong>' and setting frequency</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="success-box border-l-4 border-green-500 rounded-lg p-4 mt-4">
+                                    <h5 class="font-semibold mb-2 text-gray-800">
+                                        <i class="fas fa-lightbulb mr-2 text-yellow-600"></i>
+                                        Key Performance Indicators to Track
+                                    </h5>
+                                    <div class="grid md:grid-cols-2 gap-4 mt-3">
+                                        <div>
+                                            <ul class="space-y-1 text-gray-700">
+                                                <li><strong>Lead Conversion Rate:</strong> % of leads becoming patients</li>
+                                                <li><strong>Average Deal Value:</strong> Mean revenue per treatment plan</li>
+                                                <li><strong>Sales Cycle Length:</strong> Days from lead to closed deal</li>
+                                                <li><strong>Pipeline Velocity:</strong> Speed of deals moving through stages</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <ul class="space-y-1 text-gray-700">
+                                                <li><strong>Win Rate:</strong> % of proposals accepted by patients</li>
+                                                <li><strong>Patient Lifetime Value:</strong> Total revenue per patient</li>
+                                                <li><strong>Referral Rate:</strong> % of patients from referrals</li>
+                                                <li><strong>Follow-up Compliance:</strong> % of scheduled follow-ups completed</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lang-ar">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-800">
+                            <i class="fas fa-chart-line mr-3 text-purple-600"></i>
+                            قسم نظام CRM والمبيعات الأساسي
+                        </h2>
+
+                        <!-- Arabic version of Core CRM content would go here -->
+                        <div class="info-box rounded-lg p-6">
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                يحتوي هذا القسم على جميع سير العمل والإجراءات الخاصة بإدارة علاقات العملاء والمبيعات، بما في ذلك إدارة العملاء المتوقعين، تحويل الاتصالات، إدارة الصفقات، والمتابعة مع المرضى. يوفر هذا القسم تعليمات تفصيلية خطوة بخطوة لضمان عدم حاجة أي موظف في قسم المبيعات للبحث عن معلومات إضافية.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="reception" class="tab-content p-8">
+                    <div class="lang-en">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-800">
+                            <i class="fas fa-desk mr-3 text-purple-600"></i>
+                            Reception Desk Operations
+                        </h2>
+
+                        <!-- Patient Check-in -->
+                        <div class="workflow-card bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg p-6 mb-8 shadow-md">
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">
+                                <i class="fas fa-user-check mr-2 text-blue-600"></i>
+                                Patient Check-in Process
+                            </h3>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-xl font-semibold mb-3 text-gray-700">Step 1: Welcome and Initial Registration</h4>
+                                <div class="bg-white rounded-lg p-4 space-y-2">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Greet patient with smile: "Welcome to Crystal Shine Clinic! How may I help you today?"</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Ask for patient's full name and date of birth for identification</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Open Zoho CRM and navigate to '<strong>Contacts</strong>' module</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Search for existing record using '<strong>Search</strong>' bar (enter name or phone number)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700"><strong>If returning patient:</strong> Open contact record and verify all information is current</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Click '<strong>Edit</strong>' button to update any changed details (phone, address, insurance)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700"><strong>If new patient:</strong> Click '<strong>Create Contact</strong>' button</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Fill all mandatory fields: First Name, Last Name, Date of Birth, Mobile, Email</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Request and scan government-issued ID (national ID, passport, or driver's license)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Attach scanned ID to contact record using '<strong>Attach</strong>' button</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Collect insurance card (if applicable) and scan both front and back</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Take patient photo using clinic camera or scanner (if policy requires)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Upload photo to contact record in '<strong>Photo</strong>' field</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Verify today's appointment by checking integrated calendar</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Inform patient of expected wait time based on doctor's schedule</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Direct patient to waiting area: "Please have a seat in the waiting area. Dr. [Name] will see you shortly."</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Provide new patient forms if required (medical history, consent forms)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Update contact record status to '<strong>Checked In</strong>' for today's visit</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="warning-box border-l-4 border-yellow-500 rounded-lg p-4 mt-4">
+                                    <h5 class="font-semibold mb-2 text-gray-800">
+                                        <i class="fas fa-exclamation-triangle mr-2 text-yellow-600"></i>
+                                        Critical Information to Collect
+                                    </h5>
+                                    <div class="grid md:grid-cols-2 gap-4 mt-3">
+                                        <div>
+                                            <p class="font-semibold mb-2">For All Patients:</p>
+                                            <ul class="space-y-1 text-sm text-gray-700">
+                                                <li>• Full legal name (as on ID)</li>
+                                                <li>• Date of birth</li>
+                                                <li>• National ID or passport number</li>
+                                                <li>• Current mobile phone</li>
+                                                <li>• Email address</li>
+                                                <li>• Home address</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold mb-2">For New Patients:</p>
+                                            <ul class="space-y-1 text-sm text-gray-700">
+                                                <li>• Emergency contact name and phone</li>
+                                                <li>• Known allergies (medications, food)</li>
+                                                <li>• Chronic medical conditions</li>
+                                                <li>• Current medications</li>
+                                                <li>• Insurance provider and policy number</li>
+                                                <li>• Preferred appointment times</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Appointment Scheduling -->
+                        <div class="workflow-card bg-gradient-to-r from-green-50 to-teal-50 rounded-lg p-6 mb-8 shadow-md">
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">
+                                <i class="fas fa-calendar-alt mr-2 text-green-600"></i>
+                                Appointment Scheduling and Management
+                            </h3>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-xl font-semibold mb-3 text-gray-700">Step 2: Booking New Appointments</h4>
+                                <div class="bg-white rounded-lg p-4 space-y-2">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Access Zoho Bookings through CRM integration or dedicated Bookings portal</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Click '<strong>Book Appointment</strong>' button on contact record or in Bookings calendar</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Select '<strong>Service Type</strong>' from dropdown (Consultation, Follow-up, Treatment, Emergency)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Choose '<strong>Physician/Specialist</strong>' based on patient's preference or service requirement</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">View doctor's availability calendar showing all open time slots</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Consider procedure duration: Consultation (30 min), Basic Treatment (45 min), Complex Procedure (60-120 min)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Select available date and time slot that meets patient's schedule</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Confirm '<strong>Location</strong>' if clinic has multiple branches</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Add '<strong>Appointment Notes</strong>' with reason for visit and special requirements</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Review appointment summary showing date, time, doctor, service, and location</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Click '<strong>Confirm Booking</strong>' to finalize appointment</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">System automatically sends confirmation email and SMS to patient</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Automated reminder will be sent 24 hours before appointment</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Verbally confirm appointment details with patient before they leave</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="success-box border-l-4 border-green-500 rounded-lg p-4 mt-4">
+                                    <h5 class="font-semibold mb-2 text-gray-800">
+                                        <i class="fas fa-clock mr-2 text-green-600"></i>
+                                        Scheduling Best Practices
+                                    </h5>
+                                    <div class="space-y-2 text-gray-700">
+                                        <p><strong>Buffer Time:</strong> Always maintain 15-minute buffer between patient appointments for emergencies and delays</p>
+                                        <p><strong>Emergency Slots:</strong> Block 2-3 time slots daily for urgent walk-in patients or same-day emergencies</p>
+                                        <p><strong>Procedure Complexity:</strong> Simple consultations (30 min), Minor treatments (45 min), Major procedures (90-120 min)</p>
+                                        <p><strong>Peak Hours:</strong> Mornings (9-11 AM) and evenings (4-6 PM) are busiest - schedule accordingly</p>
+                                        <p><strong>Multi-Location:</strong> Verify doctor's location schedule if practicing at multiple branches</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <h4 class="text-xl font-semibold mb-3 text-gray-700">Step 3: Rescheduling and Cancellations</h4>
+                                <div class="bg-white rounded-lg p-4 space-y-2">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Locate existing appointment in Zoho Bookings calendar view</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Click on appointment entry to open appointment details</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700"><strong>To Reschedule:</strong> Click '<strong>Reschedule</strong>' button</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Select new date and time from available slots</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Add '<strong>Reason for Reschedule</strong>' in notes field</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Confirm changes - system sends updated appointment notification</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700"><strong>To Cancel:</strong> Click '<strong>Cancel Appointment</strong>' button</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Select '<strong>Cancellation Reason</strong>' from dropdown (Patient Request, Emergency, No Show, Other)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Add detailed explanation in '<strong>Comments</strong>' field</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Check '<strong>Send Notification</strong>' to inform patient of cancellation</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">If patient-initiated cancellation, offer to rebook immediately</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Note cancellation in patient's contact record for tracking purposes</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Insurance Verification -->
+                        <div class="workflow-card bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg p-6 mb-8 shadow-md">
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800">
+                                <i class="fas fa-shield-alt mr-2 text-purple-600"></i>
+                                Insurance Verification and Processing
+                            </h3>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-xl font-semibold mb-3 text-gray-700">Step 4: Verifying Insurance Coverage</h4>
+                                <div class="bg-white rounded-lg p-4 space-y-2">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Request current insurance card from patient during check-in</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Scan or photograph <strong>both sides</strong> of insurance card using clinic scanner</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Open patient's contact record in Zoho CRM</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Navigate to '<strong>Insurance Information</strong>' section</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Click '<strong>Attach Files</strong>' and upload scanned insurance card images</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Enter '<strong>Insurance Provider</strong>' name (e.g., Bupa, Medgulf, AXA, Tawuniya)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Record '<strong>Policy Number</strong>' and '<strong>Group Number</strong>' from card</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Enter '<strong>Policy Holder Name</strong>' and '<strong>Relationship to Patient</strong>' (Self, Spouse, Dependent)</p>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <i class="fas fa-arrow-right text-purple-500 mt-1 mr-3"></i>
+                                        <p class="text-gray-700">Record '<strong>Policy Effective Date</strong>' and '<strong>Expiration Date</strong>'

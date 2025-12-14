@@ -124,6 +124,371 @@
             }
         }
     </style>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crystal Shine Clinic - Zoho CRM Comprehensive Manual</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .content-wrapper {
+            background: white;
+            min-height: 100vh;
+        }
+        
+        .gradient-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            border-bottom: 3px solid #667eea;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .search-highlight {
+            background-color: #fef08a;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        .workflow-card {
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s ease;
+        }
+        
+        .workflow-card:hover {
+            transform: translateX(5px);
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .module-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .module-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+        
+        [dir="rtl"] {
+            direction: rtl;
+            text-align: right;
+        }
+        
+        [dir="rtl"] .workflow-card {
+            border-left: none;
+            border-right: 4px solid #667eea;
+        }
+        
+        [dir="rtl"] .workflow-card:hover {
+            transform: translateX(-5px);
+        }
+        
+        .lang-en { display: block; }
+        .lang-ar { display: none; }
+        
+        [dir="rtl"] .lang-en { display: none; }
+        [dir="rtl"] .lang-ar { display: block; }
+        
+        .icon-feature {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+        }
+        
+        .success-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Language Toggle Function
+        function toggleLanguage(lang) {
+            const html = document.documentElement;
+            if (lang === 'ar') {
+                html.setAttribute('dir', 'rtl');
+                document.getElementById('btn-ar').classList.add('bg-purple-600', 'text-white');
+                document.getElementById('btn-ar').classList.remove('bg-white', 'text-gray-800');
+                document.getElementById('btn-en').classList.add('bg-white', 'text-gray-800');
+                document.getElementById('btn-en').classList.remove('bg-purple-600', 'text-white');
+            } else {
+                html.setAttribute('dir', 'ltr');
+                document.getElementById('btn-en').classList.add('bg-purple-600', 'text-white');
+                document.getElementById('btn-en').classList.remove('bg-white', 'text-gray-800');
+                document.getElementById('btn-ar').classList.add('bg-white', 'text-gray-800');
+                document.getElementById('btn-ar').classList.remove('bg-purple-600', 'text-white');
+            }
+        }
+
+        // Tab Switching Function
+        function openTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+
+            // Remove active class from all tab buttons
+            const tabButtons = document.getElementsByClassName('tab-button');
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active');
+            }
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.closest('.tab-button').classList.add('active');
+        }
+
+        // Search Function
+        function searchContent() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const searchInputAr = document.getElementById('searchInputAr').value.toLowerCase();
+            const searchTerm = searchInput || searchInputAr;
+
+            // Get all searchable content
+            const allText = document.querySelectorAll('.tab-content p, .tab-content li, .tab-content h3, .tab-content h4');
+
+            allText.forEach(element => {
+                // Remove previous highlights
+                const text = element.textContent;
+                element.innerHTML = text;
+
+                if (searchTerm && text.toLowerCase().includes(searchTerm)) {
+                    // Highlight matching text
+                    const regex = new RegExp(`(${searchTerm})`, 'gi');
+                    element.innerHTML = text.replace(regex, '<span class="search-highlight">$1</span>');
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleLanguage('en');
+        });
+    </script>
+
+    <div class="content-wrapper">
+        <!-- Language Toggle Button -->
+        <div class="no-print fixed top-4 right-4 z-50 flex gap-2">
+            <button onclick="toggleLanguage('en')" id="btn-en" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-300">
+                <i class="fas fa-globe mr-2"></i>English
+            </button>
+            <button onclick="toggleLanguage('ar')" id="btn-ar" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-300">
+                <i class="fas fa-globe mr-2"></i>العربية
+            </button>
+        </div>
+
+        <!-- Header -->
+        <div class="gradient-header text-white py-12 px-6">
+            <div class="max-w-7xl mx-auto">
+                <h1 class="text-5xl font-bold mb-4 lang-en">Crystal Shine Clinic</h1>
+                <h1 class="text-5xl font-bold mb-4 lang-ar">عيادة كريستال شاين</h1>
+                <h2 class="text-3xl mb-2 lang-en">Zoho CRM Comprehensive Manual</h2>
+                <h2 class="text-3xl mb-2 lang-ar">دليل Zoho CRM الشامل</h2>
+                <p class="text-xl opacity-90 lang-en">Complete Guide to Streamlined Medical Practice Management</p>
+                <p class="text-xl opacity-90 lang-ar">دليل كامل لإدارة الممارسات الطبية بكفاءة</p>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="no-print max-w-7xl mx-auto px-6 -mt-6 mb-8">
+            <div class="bg-white rounded-lg shadow-xl p-4">
+                <div class="relative">
+                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Search for features, workflows, or procedures..." 
+                        class="w-full pl-12 pr-4 py-3 rounded-lg border-2 border-gray-200 focus:border-purple-500 focus:outline-none transition lang-en"
+                        onkeyup="searchContent()"
+                    >
+                    <input 
+                        type="text" 
+                        id="searchInputAr" 
+                        placeholder="ابحث عن الميزات أو سير العمل أو الإجراءات..." 
+                        class="w-full pl-12 pr-4 py-3 rounded-lg border-2 border-gray-200 focus:border-purple-500 focus:outline-none transition lang-ar"
+                        onkeyup="searchContent()"
+                    >
+                </div>
+            </div>
+        </div>
+
+        <!-- Introduction Section -->
+        <div class="max-w-7xl mx-auto px-6 mb-12">
+            <div class="bg-white rounded-lg shadow-xl p-8">
+                <h2 class="text-4xl font-bold mb-6 text-gray-800 lang-en">
+                    <i class="fas fa-network-wired mr-3 text-purple-600"></i>
+                    Zoho CRM Core Logic & Data Flow
+                </h2>
+                <h2 class="text-4xl font-bold mb-6 text-gray-800 lang-ar">
+                    <i class="fas fa-network-wired mr-3 text-purple-600"></i>
+                    المنطق الأساسي وتدفق البيانات في Zoho CRM
+                </h2>
+
+                <div class="lang-en">
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-700">Understanding Zoho CRM for Healthcare</h3>
+                        <p class="text-lg text-gray-600 leading-relaxed mb-4">
+                            Zoho CRM is a comprehensive patient relationship management system designed to streamline medical practice operations. The system operates on a logical data flow that transforms potential patients into active accounts while maintaining complete interaction history.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="lang-ar">
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-700">فهم Zoho CRM للرعاية الصحية</h3>
+                        <p class="text-lg text-gray-600 leading-relaxed mb-4">
+                            Zoho CRM هو نظام شامل لإدارة علاقات المرضى مصمم لتبسيط عمليات الممارسة الطبية.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Section -->
+        <div class="max-w-7xl mx-auto px-6 mb-12">
+            <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+                <!-- Tab Buttons -->
+                <div class="no-print flex border-b">
+                    <button class="tab-button active flex-1 py-4 px-6 text-center font-semibold transition-colors hover:bg-gray-50" onclick="openTab('core-sales')">
+                        <i class="fas fa-chart-line mr-2"></i>
+                        <span class="lang-en">Core CRM & Sales</span>
+                        <span class="lang-ar">نظام CRM والمبيعات الأساسي</span>
+                    </button>
+                    <button class="tab-button flex-1 py-4 px-6 text-center font-semibold transition-colors hover:bg-gray-50" onclick="openTab('reception')">
+                        <i class="fas fa-desk mr-2"></i>
+                        <span class="lang-en">Reception Desk</span>
+                        <span class="lang-ar">مكتب الاستقبال</span>
+                    </button>
+                    <button class="tab-button flex-1 py-4 px-6 text-center font-semibold transition-colors hover:bg-gray-50" onclick="openTab('accounting')">
+                        <i class="fas fa-calculator mr-2"></i>
+                        <span class="lang-en">Accounting & Finance</span>
+                        <span class="lang-ar">المحاسبة والتمويل</span>
+                    </button>
+                </div>
+
+                <!-- Tab Contents -->
+                <div id="core-sales" class="tab-content active p-8">
+                    <div class="lang-en">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-800">
+                            <i class="fas fa-chart-line mr-3 text-purple-600"></i>
+                            Core CRM & Sales Department
+                        </h2>
+                        <div class="info-box rounded-lg p-6">
+                            <p class="text-lg text-gray-700">This section contains all CRM workflows including lead management, contact conversion, deal management, and patient follow-up procedures.</p>
+                        </div>
+                    </div>
+                    <div class="lang-ar">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-800">
+                            <i class="fas fa-chart-line mr-3 text-purple-600"></i>
+                            قسم نظام CRM والمبيعات الأساسي
+                        </h2>
+                        <div class="info-box rounded-lg p-6">
+                            <p class="text-lg text-gray-700">يحتوي هذا القسم على جميع سير العمل الخاصة بإدارة علاقات العملاء والمبيعات.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="reception" class="tab-content p-8">
+                    <div class="lang-en">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-800">
+                            <i class="fas fa-desk mr-3 text-purple-600"></i>
+                            Reception Desk Operations
+                        </h2>
+                        <div class="info-box rounded-lg p-6">
+                            <p class="text-lg text-gray-700">This section covers patient check-in, appointment scheduling, insurance verification, and reception desk workflows.</p>
+                        </div>
+                    </div>
+                    <div class="lang-ar">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-800">
+                            <i class="fas fa-desk mr-3 text-purple-600"></i>
+                            عمليات مكتب الاستقبال
+                        </h2>
+                        <div class="info-box rounded-lg p-6">
+                            <p class="text-lg text-gray-700">يغطي هذا القسم تسجيل دخول المرضى وجدولة المواعيد والتحقق من التأمين.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="accounting" class="tab-content p-8">
+                    <div class="lang-en">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-800">
+                            <i class="fas fa-calculator mr-3 text-purple-600"></i>
+                            Accounting & Finance
+                        </h2>
+                        <div class="info-box rounded-lg p-6">
+                            <p class="text-lg text-gray-700">This section includes billing procedures, payment processing, invoice management, and financial reporting.</p>
+                        </div>
+                    </div>
+                    <div class="lang-ar">
+                        <h2 class="text-3xl font-bold mb-6 text-gray-800">
+                            <i class="fas fa-calculator mr-3 text-purple-600"></i>
+                            المحاسبة والتمويل
+                        </h2>
+                        <div class="info-box rounded-lg p-6">
+                            <p class="text-lg text-gray-700">يتضمن هذا القسم إجراءات الفوترة ومعالجة الدفع وإدارة الفواتير.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
 </head>
 <body>
     <div class="content-wrapper">
